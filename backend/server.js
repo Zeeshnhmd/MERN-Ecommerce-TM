@@ -3,12 +3,15 @@ import cors from 'cors';
 
 import products from './data/products.js';
 import { config } from './config/config.js';
+import connectDB from './config/db.js';
 
 const app = express();
 
 app.use(cors());
 
 const port = config.port || 4000;
+
+connectDB();
 
 app.get('/', (req, res) => res.json({ message: 'Welcome to ecommerce API' }));
 
