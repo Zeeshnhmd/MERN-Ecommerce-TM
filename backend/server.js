@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 
-import products from './data/products.js';
 import { config } from './config/config.js';
 import connectDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js';
 
 const app = express();
 
@@ -15,12 +15,6 @@ connectDB();
 
 app.get('/', (req, res) => res.json({ message: 'Welcome to ecommerce API' }));
 
-app.get('/api/products', (req, res) => res.json({ data: products }));
-
-app.get('/api/product/:id', (req, res) => {
-	const product = products.find((p) => p._id === req.params.id);
-
-	res.json({ data: product });
-});
+app.use('/api/products', productRoutes);
 
 app.listen(port, () => console.log(`Server started on port: ${port}`));
