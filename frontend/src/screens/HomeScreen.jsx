@@ -4,17 +4,26 @@ import Product from '../components/Product';
 import { useGetProductsQuery } from '../slices/productApiSlice';
 
 const HomeScreen = () => {
-	const { data: products } = useGetProductsQuery();
+	const { data: products, isLoading, error } = useGetProductsQuery();
+
 	return (
 		<>
-			<h1>Latest Products</h1>
-			<Row>
-				{products?.data?.map((product) => (
-					<Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-						<Product product={product} />
-					</Col>
-				))}
-			</Row>
+			{isLoading ? (
+				<h1>Loading...</h1>
+			) : error ? (
+				<h1>{error.error}</h1>
+			) : (
+				<>
+					<h1>Latest Products</h1>
+					<Row>
+						{products?.data?.map((product) => (
+							<Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+								<Product product={product} />
+							</Col>
+						))}
+					</Row>
+				</>
+			)}
 		</>
 	);
 };
