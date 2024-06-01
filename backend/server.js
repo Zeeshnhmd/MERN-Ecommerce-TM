@@ -9,6 +9,10 @@ import { errorHandler, notFound } from './middleware/errormiddleware.js';
 
 const app = express();
 
+// Body Parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
 const port = config.port || 4000;
