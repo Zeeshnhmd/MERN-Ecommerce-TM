@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 import { config } from './config/config.js';
 import connectDB from './config/db.js';
@@ -12,6 +13,9 @@ const app = express();
 // Body Parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Cookie parser middleware
+app.use(cookieParser());
 
 app.use(cors());
 
